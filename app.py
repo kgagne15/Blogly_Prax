@@ -18,7 +18,6 @@ db.create_all()
 @app.route('/')
 def list_users(): 
     """Show list of all users in db"""
-    users = User.query.all()
     return redirect('/users')
 
 @app.route('/users')

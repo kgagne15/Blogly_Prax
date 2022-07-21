@@ -1,1 +1,3 @@
 https://www.askpython.com/python-modules/flask/flask-redirect-url
+https://teamtreehouse.com/community/formatting-the-datetime-string-with-sqlalchemy
+

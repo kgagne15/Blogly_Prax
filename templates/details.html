@@ -8,6 +8,13 @@
   <li>Pic: <img src="{{user.image_url}}" alt=""> </li>
 </ul>
 
+{% for p in posts %}
+<ul>
+    <li><a href="/posts/{{p.id}}">{{p.title}}</a></li>
+    
+</ul>
+{% endfor %}
+
 <form action="/users/{{user.id}}/edit">
     <button>Edit User</button>
 </form>

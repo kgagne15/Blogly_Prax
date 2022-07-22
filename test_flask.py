@@ -1,6 +1,6 @@
 from unittest import TestCase
 from app import app
-from models import db, User
+from models import db, User, Post
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///users_test'
 app.config['SQLALCHEMY_ECHO'] = False
@@ -19,12 +19,16 @@ class UserViewsTestCase(TestCase):
         """Add sample user."""
 
         User.query.delete()
+        
         user = User(first_name="TestUser", last_name="Smith", image_url="https://mahanmedical.com/image/cache/product/test-1000x1000.jpg")
+        
         db.session.add(user)
         db.session.commit()
 
+
         self.user_id = user.id
         self.user = user
+
     
     def tearDown(self):
         """Clean up any fouled transaction"""
@@ -55,6 +59,7 @@ class UserViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn("TestUser2", html)
+
     
     def test_delete_user(self):
         with app.test_client() as client:
@@ -62,3 +67,5 @@ class UserViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(User.query.get(self.user_id), None)
+
+

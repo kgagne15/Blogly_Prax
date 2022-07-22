@@ -1,5 +1,6 @@
 """Blogly application."""
 
+from crypt import methods
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Post
@@ -93,3 +94,24 @@ def submit_edit_post(post_id):
     db.session.add(post)
     db.session.commit()
     return redirect(f'/posts/{post_id}')
+
+@app.route('/users/<int:user_id>/posts/new')
+def new_post_form(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template('new_post.html', user=user)
+
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def new_post_submit(user_id):
+    post_title = request.form['new-title']
+    post_content = request.form['new-content']
+    new_post = Post(title=post_title, content=post_content, user_id=user_id)
+    db.session.add(new_post)
+    db.session.commit()
+    return redirect(f'/users/{user_id}')
+
+@app.route('/posts/<int:post_id>/delete', methods=["POST"])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/users')

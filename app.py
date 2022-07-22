@@ -78,3 +78,18 @@ def show_posts(post_id):
     user_first = post.user.first_name
     user_last = post.user.last_name
     return render_template('posts.html', post=post, first=user_first, last=user_last)
+
+
+@app.route('/posts/<int:post_id>/edit')
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('edit_post.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def submit_edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['updated-title']
+    post.content = request.form['updated-content']
+    db.session.add(post)
+    db.session.commit()
+    return redirect(f'/posts/{post_id}')

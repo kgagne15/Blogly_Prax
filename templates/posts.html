@@ -4,4 +4,15 @@
     <h1>{{post.title}}</h1>
     <p>{{post.content}}</p>
     <p><i>By {{first}} {{last}}</i></p>
+
+
+    <form action="/users">
+        <button>Cancel</button>
+    </form>
+    <form action="/posts/{{post.id}}/edit">
+        <button>Edit Post</button>
+    </form>
+    <form action="">
+        <button>Delete Post</button>
+    </form>
 {% endblock %}

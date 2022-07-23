@@ -1,3 +1,4 @@
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
@@ -40,7 +41,30 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     user = db.relationship('User', backref='posts')
+    tagged_items = db.relationship('PostTag', backref='post')
+    tags = db.relationship('Tag', secondary='posts_tags', backref='posts')
 
     def __repr__(self):
         return f'<Title: {self.title}, Content: {self.content}, Created: {self.created_at}, User: {self.user_id}>'
-        
+
+class Tag(db.Model):
+    """Models for Tag table"""
+    
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(25), nullable=False, unique=True)
+
+    tagged_items = db.relationship('PostTag', backref='tag')
+    # posts = db.relationship('Post', secondary="posts_tags", backref='tags')
+
+    def __repr__(self):
+        return f'<Name: {self.name}>'
+
+class PostTag(db.Model):
+    """Model for PostTag table"""
+
+    __tablename__ = 'posts_tags'
+
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)  

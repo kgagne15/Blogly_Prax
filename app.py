@@ -115,3 +115,14 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return redirect('/users')
+
+@app.route('/tags')
+def list_all_tags():
+    tags = Tag.query.all()
+    return render_template('list_tags.html', tags=tags)
+
+@app.route('/tags/<int:tag_id>')
+def show_tag(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    posts = tag.posts
+    return render_template('tag_details.html', tag=tag, posts=posts)

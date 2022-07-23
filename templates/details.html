@@ -8,6 +8,7 @@
   <li>Pic: <img src="{{user.image_url}}" alt=""> </li>
 </ul>
 
+<h2>{{user.first_name}}'s Posts</h2>
 {% for p in posts %}
 <ul>
     <li><a href="/posts/{{p.id}}">{{p.title}}</a></li>

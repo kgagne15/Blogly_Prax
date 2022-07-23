@@ -7,5 +7,8 @@
         Content: <input type="text" placeholder="{{post.content}}" name="updated-content">
         <button>Update Post</button>
     </form>
+    <form action="/posts/{{post.id}}">
+        <button>Cancel</button>
+    </form>
 
 {% endblock %}

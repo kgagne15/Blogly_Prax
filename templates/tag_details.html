@@ -11,4 +11,16 @@
         <li> <a href="/posts/{{p.id}}">{{p.title}}</a></li>
         {% endfor %}
     </ul>
+
+    <form action="/tags/{{tag.id}}/edit">
+        <button>Edit Tag</button>
+    </form>
+
+    <form action="/tags/{{tag.id}}/delete">
+        <button>Delete Tag</button>
+    </form>
+
+    <form action="/users">
+        <button>Home</button>
+    </form>
 {% endblock %}

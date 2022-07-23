@@ -1,3 +1,6 @@
 https://www.askpython.com/python-modules/flask/flask-redirect-url
 https://teamtreehouse.com/community/formatting-the-datetime-string-with-sqlalchemy
+https://stackoverflow.com/questions/65586560/flask-request-args-getlist-can-only-be-read-once
+https://programtalk.com/python-examples/flask.request.values.getlist/
+https://stackoverflow.com/questions/24204118/flask-request-form-getlist-wont-return-any-entries
 

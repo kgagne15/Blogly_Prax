@@ -56,7 +56,6 @@ class Tag(db.Model):
     name = db.Column(db.String(25), nullable=False, unique=True)
 
     tagged_items = db.relationship('PostTag', backref='tag')
-    # posts = db.relationship('Post', secondary="posts_tags", backref='tags')
 
     def __repr__(self):
         return f'<Name: {self.name}>'

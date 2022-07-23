@@ -3,6 +3,12 @@
 {% block content %}
     <h1>{{post.title}}</h1>
     <p>{{post.content}}</p>
+    <h2>Tags</h2>
+    <ul>
+        {% for t in tags %}
+        <li><a href="/tags/{{t.id}}">{{t.name}}</a></li>
+        {% endfor %}
+    </ul>
     <p><i>By {{first}} {{last}}</i></p>
 
 

@@ -178,9 +178,12 @@ def edit_tag_submit(tag_id):
     db.session.commit()
     return redirect('/tags')
 
-@app.route('/tags/<int:tag_id>/delete')
+@app.route('/tags/<int:tag_id>/delete', methods=["POST"])
 def delete_tag(tag_id):
     tag = Tag.query.get_or_404(tag_id)
+    for item in tag.tagged_items:
+        db.session.delete(item)
+        db.session.commit()
     db.session.delete(tag)
     db.session.commit()
     return redirect('/tags')
